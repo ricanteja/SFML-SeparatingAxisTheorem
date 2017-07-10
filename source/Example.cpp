@@ -3,8 +3,8 @@
 #include "CollisionObject.h"
 #include "Grid.h"
 
-#define FRAME_LIMIT (1.0f / 60.0f)
-#define COUNT_LIMIT 1
+#define UPDATE_RATE (1.0f / 60.0f)
+#define COUNT_LIMIT 10
 
 
 int main()
@@ -13,6 +13,7 @@ int main()
 	std::cout << "Move with arrow keys - Press Space to spin" << std::endl;
 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Separating Axis Theorem", sf::Style::Close);
+	window.setVerticalSyncEnabled(true);
 	std::srand(static_cast<unsigned int>(time(NULL)));
 
 	sf::Clock frame_clock;
@@ -55,14 +56,14 @@ int main()
 		}
 
 		// Update Scene
-		while(frame_total > FRAME_LIMIT && loop_count < COUNT_LIMIT)
+		while(frame_total > UPDATE_RATE && loop_count < COUNT_LIMIT)
 		{
 			for(CollisionObject* object : game_objects)
 				object->loop();
 
 			grid.checkCollisions(game_objects);
 
-			frame_total -= FRAME_LIMIT;
+			frame_total -= UPDATE_RATE;
 			loop_count++;
 		}
 

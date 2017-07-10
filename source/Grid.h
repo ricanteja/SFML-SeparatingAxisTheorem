@@ -178,9 +178,6 @@ private:
 			if(!rect.intersects(screen_space))
 				continue;
 
-			//if(rect.top + rect.height < 0 || rect.top + rect.height > m_dimensions.y ||
-			//	rect.left 
-
 			cell_min.x = static_cast<int>(rect.left / cell_size.x);
 			cell_min.x -= cell_min.x % 1;
 			cell_min.y = static_cast<int>(rect.top / cell_size.y);
